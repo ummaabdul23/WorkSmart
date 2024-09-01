@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorkSmart - Homework Submission</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="submission-container">
+        <header>
+            <h1>Submit Homework</h1>
+            <nav>
+                <ul>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="#">Assignments</a></li>
+                    <li><a href="#">Submissions</a></li>
+                    <li><a href="#">Feedback</a></li>
+                    <li><a href="index.html">Logout</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="submission-form">
+            <form id="submissionForm">
+                <div class="form-group">
+                    <label for="assignment">Assignment</label>
+                    <select id="assignment" name="assignment" required>
+                        <option value="">Select Assignment</option>
+                        <option value="assignment1">Homework 1</option>
+                        <option value="assignment2">Homework 2</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="fileUpload">Upload Your Work</label>
+                    <input type="file" id="fileUpload" name="fileUpload" required>
+                </div>
+                <button type="submit">Submit Homework</button>
+            </form>
+        </section>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorkSmart - Create Homework</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="homework-container">
+        <header>
+            <h1>Create Homework Assignment</h1>
+            <nav>
+                <ul>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="#">Assignments</a></li>
+                    <li><a href="#">Submissions</a></li>
+                    <li><a href="#">Feedback</a></li>
+                    <li><a href="index.html">Logout</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="homework-form">
+            <form id="homeworkForm">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="dueDate">Due Date</label>
+                    <input type="date" id="dueDate" name="dueDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="fileUpload">Upload File (Optional)</label>
+                    <input type="file" id="fileUpload" name="fileUpload">
+                </div>
+                <button type="submit">Create Assignment</button>
+            </form>
+        </section>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+</html>
