@@ -3,32 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WorkSmart - Login</title>
+    <title>WorkSmart Login</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <div class="login-container">
-        <h2>Login</h2>
+        <h2>Login to WorkSmart</h2>
         <form id="loginForm">
             <div class="form-group">
-                <label for="username">Username or Email</label>
-                <input type="text" id="username" name="username" autocomplete="Username">
+                <label for="username">Username</label>
+                <input type="text" id="username" required>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" required>
             </div>
             <button type="submit">Login</button>
-            <p><a href="#">Forgot Password?</a></p>
         </form>
+        <p>Don't have an account? <a href="register.html">Register here</a>.</p>
     </div>
+   
     <script>
         document.getElementById("loginForm").addEventListener("submit", async function(e) {
-            e.preventDefault();
+            e.preventDefault();  // Prevent form from refreshing the page
             
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
 
+            // Call the login API to authenticate the user
             const response = await fetch('/api/auth/login', {
                 method: 'POST',
                 headers: {
@@ -38,10 +40,16 @@
             });
 
             const data = await response.json();
+            
             if (data.token) {
-                localStorage.setItem('token', data.token);  // Save token for authenticated requests
+                // Store the token and user role in localStorage
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('role', data.role);  // Save the role (teacher/student)
+
                 alert('Login successful');
-                window.location.href = '/dashboard.html';   // Redirect to dashboard
+                
+                // Redirect to the dashboard after successful login
+                window.location.href = '/dashboard.html';
             } else {
                 alert('Login failed');
             }

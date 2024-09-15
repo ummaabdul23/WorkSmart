@@ -28,6 +28,7 @@ app.use('/api/submission', submissionRoutes);
 
 // Sync Sequelize models with MySQL
 sequelize.sync().then(() => {
+  console.log('Database & tables created!');
   const PORT = process.env.PORT || 5000;
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 });

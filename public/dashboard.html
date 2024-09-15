@@ -3,44 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WorkSmart - Dashboard</title>
+    <title>WorkSmart Dashboard</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <div class="dashboard-container">
-        <header>
-            <h1>Welcome, [User Name]</h1>
-            <nav>
-                <ul>
-                    <li><a href="#">Assignments</a></li>
-                    <li><a href="#">Submissions</a></li>
-                    <li><a href="#">Feedback</a></li>
-                    <li><a href="index.html">Logout</a></li>
-                </ul>
-            </nav>
-        </header>
+        <h1>Welcome to WorkSmart Dashboard</h1>
 
-        <section class="dashboard-content">
-            <h2>Dashboard</h2>
-            <div class="cards">
-                <div class="card">
-                    <h3>New Assignments</h3>
-                    <p>You have 3 new assignments.</p>
-                    <a href="#">View Assignments</a>
-                </div>
-                <div class="card">
-                    <h3>Recent Submissions</h3>
-                    <p>2 assignments submitted recently.</p>
-                    <a href="#">View Submissions</a>
-                </div>
-                <div class="card">
-                    <h3>Feedback</h3>
-                    <p>1 feedback received.</p>
-                    <a href="#">View Feedback</a>
-                </div>
-            </div>
+        <!-- Teacher Section: Create Homework -->
+        <section id="teacher-section" style="display: none;">
+            <h2>Create Homework (Teachers Only)</h2>
+            <form id="createHomeworkForm">
+                <input type="text" id="title" placeholder="Title" required>
+                <textarea id="description" placeholder="Description" required></textarea>
+                <input type="date" id="dueDate" required>
+                <button type="submit">Create Homework</button>
+            </form>
+        </section>
+
+        <!-- Student Section: View and Submit Homework -->
+        <section id="student-section" style="display: none;">
+            <h2>Available Homework (Students Only)</h2>
+            <div id="homeworkList"></div>
         </section>
     </div>
-    <script src="js/main.js"></script>
+
+    <script>
+        // Retrieve the stored token and role from localStorage
+        const token = localStorage.getItem('token');
+        const role = localStorage.getItem('role');
+
+        // Redirect to login if no token is found
+        if (!token) {
+            alert('Please log in first.');
+            window.location.href = '/login.html';
+        }
+
+        // Show the appropriate section based on the user's role
+        if (role === 'teacher') {
+            document.getElementById('teacher-section').style.display = 'block';
+        } else if (role === 'student') {
+            document.getElementById('student-section').style.display = 'block';
+        } else {
+            alert('Invalid role or not logged in.');
+            window.location.href = 'login.html';  // Redirect to login if role is invalid
+        }
+
+        // Teacher: Create Homework
+        document.getElementById('createHomeworkForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('title').value;
+            const description = document.getElementById('description').value;
+            const dueDate = document.getElementById('dueDate').value;
+
+            const response = await fetch('/api/homework/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`  // Use the stored token for authenticated requests
+                },
+                body: JSON.stringify({ title, description, dueDate })
+            });
+
+            const data = await response.json();
+            if (data.id) {
+                alert('Homework created successfully');
+            } else {
+                alert('Failed to create homework');
+            }
+        });
+
+        // Student: View Homework
+        async function fetchHomework() {
+            const response = await fetch('/api/submission', {
+                headers: {
+                    'Authorization': `Bearer ${token}`  // Use the stored token for authenticated requests
+                }
+            });
+
+            const homework = await response.json();
+            const homeworkList = document.getElementById('homeworkList');
+            homeworkList.innerHTML = '';
+
+            homework.forEach(hw => {
+                const div = document.createElement('div');
+                div.innerHTML = `<h3>${hw.title}</h3><p>${hw.description}</p><p>Due: ${hw.dueDate}</p>`;
+                homeworkList.appendChild(div);
+            });
+        }
+
+        if (role === 'student') {
+            fetchHomework();  // Fetch homework if the user is a student
+        }
+    </script>
 </body>
 </html>
