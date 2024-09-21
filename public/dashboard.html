@@ -8,22 +8,53 @@
 </head>
 <body>
     <div class="dashboard-container">
-        <h1>Welcome to WorkSmart Dashboard</h1>
 
         <!-- Teacher Section: Create Homework -->
         <section id="teacher-section" style="display: none;">
-            <h2>Create Homework (Teachers Only)</h2>
-            <form id="createHomeworkForm">
-                <input type="text" id="title" placeholder="Title" required>
-                <textarea id="description" placeholder="Description" required></textarea>
-                <input type="date" id="dueDate" required>
-                <button type="submit">Create Homework</button>
-            </form>
+            <h1>Welcome to WorkSmart Dashboard</h1>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Assignments</a></li>
+                <li><a href="submission.html">Submissions</a></li>
+                <li><a href="index.html">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <form id="homeworkForm">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" rows="4" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="dueDate">Due Date</label>
+            <input type="date" id="dueDate" name="dueDate" required>
+        </div>
+        <div class="form-group">
+            <label for="fileUpload">Upload File (Optional)</label>
+            <input type="file" id="fileUpload" name="fileUpload">
+        </div>
+        <button type="submit">Create Assignment</button>
+    </form>
         </section>
 
         <!-- Student Section: View and Submit Homework -->
         <section id="student-section" style="display: none;">
-            <h2>Available Homework (Students Only)</h2>
+            <h1>Welcome to WorkSmart Dashboard</h1>
+        <header>
+            <h1>Submit Homework</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">Assignments</a></li>
+                    <li><a href="feedback.html">Feedback</a></li>
+                    <li><a href="index.html">Logout</a></li>
+                </ul>
+            </nav>
+        </header>
             <div id="homeworkList"></div>
         </section>
     </div>

@@ -14,17 +14,18 @@ body {
     height: 100vh;
 }
 
-/* Login Container */
-.login-container {
+
+/* Dashboard Container */
+.dashboard-container {
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    width: 500px;
     text-align: center;
 }
 
-h2 {
+h1, h2 {
     margin-bottom: 20px;
     color: #333;
 }
@@ -382,5 +383,32 @@ nav ul li a:hover {
 }
 
 .feedback-form button:hover {
+    background-color: #45a049;
+}
+
+form {
+    display: flex;
+    flex-direction: column; /* Align items in a column */
+    width: 300px;           /* Set form width */
+    margin: 0 auto;         /* Center the form on the page */
+}
+
+label, input, textarea, button {
+    margin-bottom: 15px;    /* Space between form elements */
+    width: 100%;            /* Make the inputs take the full width of the form */
+}
+
+/* Style the button */
+button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Button hover effect */
+button:hover {
     background-color: #45a049;
 }
